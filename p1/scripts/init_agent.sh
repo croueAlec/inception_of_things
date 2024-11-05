@@ -1,13 +1,7 @@
 #!/bin/bash
 
-curl -sfL https://get.k3s.io | K3S_URL=https://k3s.example.com sh -s - agent --token mypassword
+TOKEN=$(cat /vagrant/token)
 
-curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
-sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+apt-get update && apt-get install -y curl
 
-echo "KUBECONFIG=~/.kube/config" >> ~/.bashrc
-source ~/.bashrc
-export KUBECONFIG=~/.kube/config
-mkdir -p $KUBECONFIG
-cp /etc/rancher/k3s/k3s.yaml $KUBECONFIG
-chmod 600 $KUBECONFIG
+curl -sfL https://get.k3s.io | K3S_URL=https://192.168.56.110:6443 K3S_TOKEN=$TOKEN sh -
