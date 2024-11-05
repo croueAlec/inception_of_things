@@ -16,7 +16,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
       vb.memory = "2048"
     end
-    config.vm.provision "shell", path: "scripts/init_server.sh"
+    control.vm.provision "shell", path: "scripts/init_server.sh"
   end
 
   config.vm.define "acroueSW" do |control|
@@ -29,7 +29,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 1
       vb.memory = "512"
     end
-    config.vm.provision "shell", path: "scripts/init_agent.sh"
+    control.vm.provision "shell", path: "scripts/init_agent.sh"
   end
 
 
