@@ -24,7 +24,7 @@ kubectl config set-context --current --namespace=$ARGOCD_NAMESPACE
 
 # Wait for Argo CD to come online
 echo " * Waiting for Argo CD to come online"
-kubectl wait --for=condition=available --timeout=300s -n $ARGOCD_NAMESPACE deployment -l app.kubernetes.io/name=argocd || {
+kubectl wait --for=condition=available --timeout=300s -n $ARGOCD_NAMESPACE deployment -l app.kubernetes.io/part-of=argocd || {
     echo "Argo CD did not come online in time"; exit 1;
 }
 
