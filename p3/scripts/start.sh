@@ -46,9 +46,8 @@ argocd app create "$APP_NAME" --repo "$APP_REPO" --path "$APP_PATH" --dest-serve
 
 # Retrieve and display Argo CD admin password
 ARGOCD_PASSWORD=$(kubectl get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode)
-echo "${GREEN} * Argo CD admin password: $ARGOCD_PASSWORD${RESET}"
+echo "${GREEN} * Argo CD admin password: ${RED}$ARGOCD_PASSWORD${RESET}"
 
-# Reset context
-kubectl config set-context --current --namespace=default
+echo "${GREEN} * k3d and Argo CD setup complete! Launching port forwarding.${RESET}"
 
-echo "${GREEN} * k3d and Argo CD setup complete!${RESET}"
+kubectl port-forward services/argocd-server 8080:80
